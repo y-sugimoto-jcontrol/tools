@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Time Calculator</title>
+</head>
+<body>
+  <h1>Excel Time Calculator</h1>
+  <label for="timeInput">時間 (hh:mm:ss.ms):</label>
+  <input type="text" id="timeInput" placeholder="例: 15:19:38.500">
+  <button onclick="calculateSerial()">計算</button>
+  <p>シリアル値: <span id="result"></span></p>
+
+  <script>
+    function calculateSerial() {
+      const input = document.getElementById('timeInput').value;
+      const parts = input.match(/(\d+):(\d+):(\d+).(\d+)/);
+      if (!parts) {
+        alert("正しいフォーマットで入力してください！");
+        return;
+      }
+
+      const hours = parseInt(parts[1], 10);
+      const minutes = parseInt(parts[2], 10);
+      const seconds = parseInt(parts[3], 10);
+      const milliseconds = parseInt(parts[4], 10);
+
+      const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
+      const serialValue = totalSeconds / 86400; // 1 day = 86400 seconds
+
+      document.getElementById('result').textContent = serialValue.toFixed(15);
+    }
+  </script>
+</body>
+</html>
