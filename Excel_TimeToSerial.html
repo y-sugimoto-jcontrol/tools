@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel 時刻シリアル値変換ツール</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G25G79E1T0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-G25G79E1T0');
+  </script>
+</head>
+<body>
+  <h1>Excel 時刻シリアル値変換ツール</h1>
+
+  <!-- 時刻からシリアル値へ -->
+  <h2>時刻をシリアル値に変換</h2>
+  <label for="timeInput">時間 (hh:mm:ss.ms):</label>
+  <input type="text" id="timeInput" placeholder="例: 15:19:38.500">
+  <button onclick="timeToSerial()">変換</button>
+  <p>シリアル値: <span id="serialResult"></span></p>
+
+  <!-- シリアル値から時刻へ -->
+  <h2>シリアル値を時刻に変換</h2>
+  <label for="serialInput">シリアル値:</label>
+  <input type="number" id="serialInput" placeholder="例: 0.63864" step="0.0000001">
+  <button onclick="serialToTime()">変換</button>
+  <p>時刻: <span id="timeResult"></span></p>
+
+  <script>
+    // 時刻をシリアル値に変換
+    function timeToSerial() {
+      const input = document.getElementById('timeInput').value;
+      const parts = input.match(/(\d+):(\d+):(\d+).(\d+)/);
+      if (!parts) {
+        alert("正しいフォーマットで入力してください！");
+        return;
+      }
+
+      const hours = parseInt(parts[1], 10);
+      const minutes = parseInt(parts[2], 10);
+      const seconds = parseInt(parts[3], 10);
+      const milliseconds = parseInt(parts[4], 10);
+
+      const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
+      const serialValue = totalSeconds / 86400; // 1日=86400秒
+
+      document.getElementById('serialResult').textContent = serialValue.toFixed(15);
+    }
+
+    // シリアル値を時刻に変換
+    function serialToTime() {
+      const serialValue = parseFloat(document.getElementById('serialInput').value);
+      if (isNaN(serialValue) || serialValue < 0 || serialValue >= 1) {
+        alert("正しいシリアル値を入力してください！（0以上1未満）");
+        return;
+      }
+
+      const totalSeconds = serialValue * 86400; // 1日=86400秒
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = Math.floor(totalSeconds % 60);
+      const milliseconds = Math.round((totalSeconds % 1) * 1000);
+
+      const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+      document.getElementById('timeResult').textContent = timeString;
+    }
+  </script>
+</body>
+</html>
