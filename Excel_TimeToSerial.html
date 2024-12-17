@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Excel ƒVƒŠƒAƒ‹’l•ÏŠ·ƒc[ƒ‹</title>
+  <title>Excel æ™‚åˆ»ã‚·ãƒªã‚¢ãƒ«å€¤å¤‰æ›ãƒ„ãƒ¼ãƒ«</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G25G79E1T0"></script>
@@ -16,29 +16,29 @@
   </script>
 </head>
 <body>
-  <h1>Excel ƒVƒŠƒAƒ‹’l•ÏŠ·ƒc[ƒ‹</h1>
+  <h1>Excel æ™‚åˆ»ã‚·ãƒªã‚¢ãƒ«å€¤å¤‰æ›ãƒ„ãƒ¼ãƒ«</h1>
 
-  <!-- ‚©‚çƒVƒŠƒAƒ‹’l‚Ö -->
-  <h2>‚ğƒVƒŠƒAƒ‹’l‚É•ÏŠ·</h2>
-  <label for="timeInput">ŠÔ (hh:mm:ss.ms):</label>
-  <input type="text" id="timeInput" placeholder="—á: 15:19:38.500">
-  <button onclick="timeToSerial()">•ÏŠ·</button>
-  <p>ƒVƒŠƒAƒ‹’l: <span id="serialResult"></span></p>
+  <!-- æ™‚åˆ»ã‹ã‚‰ã‚·ãƒªã‚¢ãƒ«å€¤ã¸ -->
+  <h2>æ™‚åˆ»ã‚’ã‚·ãƒªã‚¢ãƒ«å€¤ã«å¤‰æ›</h2>
+  <label for="timeInput">æ™‚é–“ (hh:mm:ss.ms):</label>
+  <input type="text" id="timeInput" placeholder="ä¾‹: 15:19:38.500">
+  <button onclick="timeToSerial()">å¤‰æ›</button>
+  <p>ã‚·ãƒªã‚¢ãƒ«å€¤: <span id="serialResult"></span></p>
 
-  <!-- ƒVƒŠƒAƒ‹’l‚©‚ç‚Ö -->
-  <h2>ƒVƒŠƒAƒ‹’l‚ğ‚É•ÏŠ·</h2>
-  <label for="serialInput">ƒVƒŠƒAƒ‹’l:</label>
-  <input type="number" id="serialInput" placeholder="—á: 0.63864" step="0.0000001">
-  <button onclick="serialToTime()">•ÏŠ·</button>
-  <p>: <span id="timeResult"></span></p>
+  <!-- ã‚·ãƒªã‚¢ãƒ«å€¤ã‹ã‚‰æ™‚åˆ»ã¸ -->
+  <h2>ã‚·ãƒªã‚¢ãƒ«å€¤ã‚’æ™‚åˆ»ã«å¤‰æ›</h2>
+  <label for="serialInput">ã‚·ãƒªã‚¢ãƒ«å€¤:</label>
+  <input type="number" id="serialInput" placeholder="ä¾‹: 0.63864" step="0.0000001">
+  <button onclick="serialToTime()">å¤‰æ›</button>
+  <p>æ™‚åˆ»: <span id="timeResult"></span></p>
 
   <script>
-    // ‚ğƒVƒŠƒAƒ‹’l‚É•ÏŠ·
+    // æ™‚åˆ»ã‚’ã‚·ãƒªã‚¢ãƒ«å€¤ã«å¤‰æ›
     function timeToSerial() {
       const input = document.getElementById('timeInput').value;
       const parts = input.match(/(\d+):(\d+):(\d+).(\d+)/);
       if (!parts) {
-        alert("³‚µ‚¢ƒtƒH[ƒ}ƒbƒg‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢I");
+        alert("æ­£ã—ã„ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§å…¥åŠ›ã—ã¦ãã ã•ã„ï¼");
         return;
       }
 
@@ -48,20 +48,20 @@
       const milliseconds = parseInt(parts[4], 10);
 
       const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
-      const serialValue = totalSeconds / 86400; // 1“ú=86400•b
+      const serialValue = totalSeconds / 86400; // 1æ—¥=86400ç§’
 
       document.getElementById('serialResult').textContent = serialValue.toFixed(15);
     }
 
-    // ƒVƒŠƒAƒ‹’l‚ğ‚É•ÏŠ·
+    // ã‚·ãƒªã‚¢ãƒ«å€¤ã‚’æ™‚åˆ»ã«å¤‰æ›
     function serialToTime() {
       const serialValue = parseFloat(document.getElementById('serialInput').value);
       if (isNaN(serialValue) || serialValue < 0 || serialValue >= 1) {
-        alert("³‚µ‚¢ƒVƒŠƒAƒ‹’l‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢Ii0ˆÈã1–¢–j");
+        alert("æ­£ã—ã„ã‚·ãƒªã‚¢ãƒ«å€¤ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ï¼ï¼ˆ0ä»¥ä¸Š1æœªæº€ï¼‰");
         return;
       }
 
-      const totalSeconds = serialValue * 86400; // 1“ú=86400•b
+      const totalSeconds = serialValue * 86400; // 1æ—¥=86400ç§’
       const hours = Math.floor(totalSeconds / 3600);
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = Math.floor(totalSeconds % 60);
